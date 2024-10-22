@@ -102,12 +102,24 @@ let mainReducerController = (state = {}, action) => {
     }
 
     case "RESET_ACTION": {
-      console.log("?????", state.imagesTransform);
-
       let imagesTransform = [{ s: 1, r: 0 }];
       return {
         ...state,
         imagesTransform,
+      };
+    }
+
+    case "OPACITY_ON_ACTION": {
+      return {
+        ...state,
+        showOpacity: true,
+      };
+    }
+
+    case "OPACITY_OFF_ACTION": {
+      return {
+        ...state,
+        showOpacity: false,
       };
     }
 

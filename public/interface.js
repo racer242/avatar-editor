@@ -56,7 +56,6 @@ function onEditorAppReadyHandler(app) {
     mimeType: "image/png",
 
     theme: "dark",
-    // mimeType:"image/jpeg",
   });
 }
 
@@ -102,10 +101,6 @@ function onEditorAppImagesHandler(app, images, target) {
   console.log("onEditorAppImagesHandler");
 
   var data = app.getData();
-
-  if (target == "fb" || target == "vk") {
-    var windowReference = window.open();
-  }
 
   var xhr = new XMLHttpRequest();
 

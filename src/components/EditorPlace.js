@@ -8,6 +8,8 @@ import {
   clearHelp,
   useImage,
   resetAction,
+  opacityOnAction,
+  opacityOffAction,
 } from "../actions/appActions";
 
 class EditorPlace extends Component {
@@ -34,6 +36,7 @@ class EditorPlace extends Component {
     this.resetButton_clickHandler = this.resetButton_clickHandler.bind(this);
 
     this.mouseDownHandler = this.mouseDownHandler.bind(this);
+    this.mouseUpHandler = this.mouseUpHandler.bind(this);
   }
 
   componentDidMount() {
@@ -128,8 +131,16 @@ class EditorPlace extends Component {
     this.store.dispatch(resetAction());
   }
 
-  mouseDownHandler() {
+  mouseDownHandler(event) {
     this.store.dispatch(clearHelp());
+    let target = event.target ? event.target.id : "";
+    if (target === "edtr" || target === "rrn0" || target === "srn0") {
+      this.store.dispatch(opacityOnAction());
+    }
+  }
+
+  mouseUpHandler() {
+    if (this.state.showOpacity) this.store.dispatch(opacityOffAction());
   }
 
   render() {
@@ -221,7 +232,7 @@ class EditorPlace extends Component {
                 : ""
             }
             style={{
-              opacity: this.state.editable ? 0.9 : 1,
+              opacity: this.state.editable && this.state.showOpacity ? 0.5 : 1,
               width: this.state.addImagesDefaultSize
                 ? this.state.addImagesDefaultSize.width
                 : 0,
@@ -237,7 +248,10 @@ class EditorPlace extends Component {
             store={this.props.store}
             ref={this.editorRef}
             style={{
-              display: this.state.editable ? "block" : "none",
+              display:
+                this.state.editable && this.state.publishable
+                  ? "block"
+                  : "none",
               width: this.state.addImagesDefaultSize
                 ? this.state.addImagesDefaultSize.width
                 : 0,
@@ -250,6 +264,10 @@ class EditorPlace extends Component {
             id="loadButton"
             key="loadButton"
             className={imageSrc && imageSrc !== "" ? "replace" : "load"}
+            style={{
+              pointerEvents:
+                this.state.editable && this.state.publishable ? "all" : "none",
+            }}
           >
             <input
               id="inp0"
@@ -279,6 +297,10 @@ class EditorPlace extends Component {
             key="themeButton"
             className={"theme-" + this.state.theme}
             onClick={this.themeButton_clickHandler}
+            style={{
+              pointerEvents:
+                this.state.editable && this.state.publishable ? "all" : "none",
+            }}
           ></div>
 
           <div
@@ -286,6 +308,9 @@ class EditorPlace extends Component {
             key="resetButton"
             onClick={this.resetButton_clickHandler}
             style={{
+              pointerEvents:
+                this.state.editable && this.state.publishable ? "all" : "none",
+
               display:
                 this.state.publishable &&
                 this.state.editable &&
@@ -308,6 +333,7 @@ class EditorPlace extends Component {
         style: this.props.style,
         ref: this.ref,
         onMouseDown: this.mouseDownHandler,
+        onMouseUp: this.mouseUpHandler,
       },
       children
     );

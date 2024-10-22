@@ -778,7 +778,7 @@ class AvatarEditor extends React.Component {
       attributes[deviceEvents.react.mouseDown] = this.handleMouseDown;
     }
 
-    return <canvas ref={this.setCanvas} {...attributes} {...rest} />;
+    return <canvas id="edtr" ref={this.setCanvas} {...attributes} {...rest} />;
   }
 }
 

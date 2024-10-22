@@ -104,7 +104,10 @@ class Editor extends Component {
                 transform: `matrix(${addImageTransform})`,
                 width: this.state.addImagesRealSize.width,
                 height: this.state.addImagesRealSize.height,
-                pointerEvents: this.state.editable ? "all" : "none",
+                pointerEvents:
+                  this.state.editable && this.state.publishable
+                    ? "all"
+                    : "none",
               }}
             >
               <div

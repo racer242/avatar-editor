@@ -143,3 +143,15 @@ export const storageDataSaved = () => {
     },
   };
 };
+
+export const opacityOnAction = () => {
+  return {
+    type: "OPACITY_ON_ACTION",
+  };
+};
+
+export const opacityOffAction = () => {
+  return {
+    type: "OPACITY_OFF_ACTION",
+  };
+};

@@ -61,6 +61,7 @@ const settings = {
 
   republishInterval: 5000,
   theme: "dark",
+  showOpacity: false,
 };
 
 export default settings;
