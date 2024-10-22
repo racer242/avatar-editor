@@ -19,17 +19,17 @@
 .scaleRange {
   position: absolute;
   top: 100%;
-  left: 2%;
-  width: 96%;
+  left: 10%;
+  width: 80%;
   height: 10px;
   pointer-events: all;
 }
 
 .rotateRange {
   position: absolute;
-  left: 100%;
-  top: 98%;
-  width: 96%;
+  left: 102%;
+  top: 90%;
+  width: 80%;
   height: 10px;
   pointer-events: all;
   transform: rotate(-90deg);
@@ -177,4 +177,54 @@ input[type="range"]:hover::-webkit-slider-thumb {
   pointer-events: all;
   overflow: hidden;
   background-image: url("reset_button.svg");
+}
+#resetButton:hover {
+  opacity: 0.8;
+}
+
+#helpText {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  width: 265px;
+  height: 26px;
+  left: 16px;
+  top: 295px;
+  overflow: hidden;
+  background-image: url("help_text.svg");
+  background-repeat: no-repeat;
+}
+
+.help-active {
+  opacity: 1;
+}
+
+.help-inactive {
+  opacity: 0.3;
+}
+
+#hintScale {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  width: 14px;
+  height: 14px;
+  left: -6px;
+  bottom: -14px;
+  overflow: hidden;
+  background-image: url("zoom_hint.svg");
+  background-repeat: no-repeat;
+}
+
+#hintRotate {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  width: 14px;
+  height: 18px;
+  right: -17px;
+  top: -8px;
+  overflow: hidden;
+  background-image: url("rotate_hint.svg");
+  background-repeat: no-repeat;
 }

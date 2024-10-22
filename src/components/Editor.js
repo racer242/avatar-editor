@@ -49,9 +49,8 @@ class Editor extends Component {
           let targetRef = this.targetRefs[i];
           if (targetRef.current) {
             images.push(
-              targetRef.current
-                .getImageScaledToCanvas()
-                .toDataURL(this.state.mimeType)
+              targetRef.current.getImageScaledToCanvas()
+              // .toDataURL(this.state.mimeType)
             );
           } else {
             images.push(null);

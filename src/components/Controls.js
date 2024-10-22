@@ -111,6 +111,10 @@ class Controls extends Component {
                 className="rotateRange"
                 onChange={this.rotateRange_changeHandler}
               />
+
+              <div id="hintScale" key="hintScale"></div>
+              <div id="hintRotate" key="hintRotate"></div>
+
               {/* <div
                 key={"ldb" + i}
                 id={"ldb" + i}

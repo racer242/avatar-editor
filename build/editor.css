@@ -1,3 +1,15 @@
+.editorImageContainer {
+  position: absolute;
+  /* background-color: white; */
+  overflow: hidden;
+}
+
+.editorCircleMask {
+  position: absolute;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
 .loadButton {
   position: absolute;
   background-color: #fff;
@@ -24,37 +36,35 @@
   transform-origin: 0 0;
 }
 
-input[type=range] {
+input[type="range"] {
   -webkit-appearance: none;
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
 }
 
-input[type=range]:focus {
+input[type="range"]:focus {
   outline: none;
 }
-input[type=range]::-webkit-slider-runnable-track {
+input[type="range"]::-webkit-slider-runnable-track {
   width: 145px;
-  height: 5px;
+  height: 2px;
   cursor: pointer;
-  background: rgba(188,163,109,0.7);
+  background: #3d3d3d;
   -webkit-appearance: none;
 }
-input[type=range]:hover::-webkit-slider-runnable-track {
-  background: #f5c357;
+input[type="range"]:hover::-webkit-slider-runnable-track {
+  background: #3d3d3d;
 }
-input[type=range]::-webkit-slider-thumb {
-  height: 40px;
-  width: 40px;
-  margin-top: -18px;
-  border-radius: 20px;
-  border: 3px solid #f5c357;
-  background: #231918;
+input[type="range"]::-webkit-slider-thumb {
+  height: 16px;
+  width: 16px;
+  margin-top: -8px;
+  border-radius: 50%;
+  background: #a0fb3c;
   cursor: pointer;
   -webkit-appearance: none;
 }
-input[type=range]:hover::-webkit-slider-thumb {
-  background: #f5c357;
-  border-color: #231918;
+input[type="range"]:hover::-webkit-slider-thumb {
+  background: #a0fb3c;
 }
 
 /* -moz-range-track
@@ -64,129 +74,107 @@ input[type=range]:hover::-webkit-slider-thumb {
 -ms-fill-upper
 -ms-thumb */
 
-.clearImageButton {
+#loadButton {
   position: absolute;
   display: block;
-  background-color: #f5c357;
-  background-image: url(close-pics.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 50% 50%;
-  width:36px;
-  height: 36px;
-  border: 3px solid #f5c357;
-  border-radius: 45px;
-  color: #f5c357;
-  font-style: Arial;
-  font-size: 36px;
-  line-height: 36px;
-  text-align: center;
-  pointer-events: all;
+  width: 128px;
+  height: 40px;
+  left: 16px;
+  top: 16px;
   cursor: pointer;
-  left: -18px;
-  top: -18px;
-}
-.clearImageButton:hover {
-  color: #231918;
-  border: 3px solid #231918;
-}
-
-#buttonContainer {
-  position: absolute;
-  display: block;
-  transform-origin: top left;
+  pointer-events: all;
   overflow: hidden;
-  pointer-events: none;
 }
 
-
-#publishButtons {
-  position:absolute;
-  display:block;
-  bottom:80px;
-  width: 200px;
-  height: 40px;
-  right:20px;
+#loadButton:hover {
+  opacity: 0.8;
 }
 
-#readyButton,
-#viewButton {
-  position:absolute;
-  display:block;
-
-  font-size: 26px;
-  font-weight:bold;
-  text-align: center;
-
-  width: 200px;
-  height: 40px;
-  line-height:36px;
-
-  right:20px;
-  bottom:20px;
-
-  border-radius: 10px;
-  border: 3px solid #f5c357;
-  background: #231918;
-  cursor: pointer;
-  color:#f5c357;
-
-  cursor:pointer;
-  pointer-events: all;
+.replace {
+  background-image: url("replace_button.svg");
 }
 
-#readyButton {
-  font-size: 32px;
-  bottom:160px;
-  height: 60px;
-  line-height:60px;
+.replace:hover {
+  background-image: url("replace_button.svg");
+  opacity: 0.8;
 }
 
-#readyButton:hover,
-#viewButton:hover {
-  border: 4px solid #231918;
-  background: #f5c357;
-  color:#231918;
+.load {
+  background-image: url("load_button.svg");
 }
 
-.inactive {
-  opacity:0.5;
-  pointer-events:none!important;
-}
-
-.active {
-  opacity:1;
-  pointer-events:all!important;
-}
-
-.publishButton {
-  width: 60px;
-  height: 60px;
-  line-height:60px;
-
-  position:absolute;
-  display:block;
-
-  cursor:pointer;
-  pointer-events: all;
-}
-
-.publishButton:hover {
-  margin-bottom: 5px;
-}
-
-
-#fbButton {
-  right:140px;
-  bottom:0px;
-}
-
-#vkButton {
-  right:70px;
-  bottom:0px;
+.load:hover {
+  background-image: url("load_button.svg");
+  opacity: 0.8;
 }
 
 #saveButton {
-  right:0px;
-  bottom:0px;
+  position: absolute;
+  display: block;
+  width: 169px;
+  height: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 338px;
+  cursor: pointer;
+  pointer-events: all;
+  overflow: hidden;
+}
+
+.get-active {
+  background-image: url("download_button.svg");
+  pointer-events: all !important;
+}
+
+.get-active:hover {
+  background-image: url("download_button.svg");
+  opacity: 0.8;
+}
+
+.get-disabled {
+  background-image: url("download_button_disabled.svg");
+  pointer-events: none !important;
+}
+
+#themeButton {
+  position: absolute;
+  display: block;
+  width: 128px;
+  height: 40px;
+  right: 16px;
+  top: 16px;
+  cursor: pointer;
+  pointer-events: all;
+  overflow: hidden;
+}
+
+.theme-dark {
+  background-image: url("black_switch.svg");
+}
+
+.theme-dark:hover {
+  background-image: url("black_switch.svg");
+  opacity: 0.8;
+}
+
+.theme-light {
+  background-image: url("white_switch.svg");
+}
+
+.theme-light:hover {
+  background-image: url("white_switch.svg");
+  opacity: 0.8;
+}
+
+#resetButton {
+  position: absolute;
+  display: block;
+  width: 24px;
+  height: 24px;
+  left: 16px;
+  top: 74px;
+  cursor: pointer;
+  pointer-events: all;
+  overflow: hidden;
+  background-image: url("reset_button.svg");
 }

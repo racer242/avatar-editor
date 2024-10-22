@@ -35,7 +35,7 @@ const settings = {
 
   mainImageSrc: "",
   addImagesSrc: [""],
-  addImagesTransform: [null],
+  addImagesTransform: [["1", "0", "0", "1", "0", "0"]],
 
   resultImagesSrc: [""],
 
@@ -62,6 +62,8 @@ const settings = {
   republishInterval: 5000,
   theme: "dark",
   showOpacity: false,
+
+  mimeType: "image/png",
 };
 
 export default settings;

@@ -110,7 +110,7 @@ small {
   position: absolute;
   display: block;
   left: 50%;
-  top: 50%;
+  top: 43%;
   transform: translate(-50%, -50%);
 }
 
@@ -119,7 +119,7 @@ small {
   display: block;
   pointer-events: none;
   left: 50%;
-  top: 50%;
+  top: 43%;
   transform: translate(-50%, -50%);
 }
 
@@ -130,7 +130,7 @@ small {
   pointer-events: none;
   opacity: 0.95;
   left: 50%;
-  top: 50%;
+  top: 43%;
   transform: translate(-50%, -50%);
 }
 

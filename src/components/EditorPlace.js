@@ -192,8 +192,8 @@ class EditorPlace extends Component {
                 : 0,
             }}
             src={
-              this.state.backImageSrc
-                ? this.state.backImageSrc[this.state.theme]
+              this.state.mainImageSrc
+                ? this.state.mainImageSrc[this.state.theme]
                 : ""
             }
           />
@@ -276,6 +276,22 @@ class EditorPlace extends Component {
               className="loadInput"
             />
           </div>
+
+          <div
+            id="helpText"
+            key="helpText"
+            className={
+              this.state.publishable &&
+              this.state.editable &&
+              imageSrc &&
+              imageSrc !== "" &&
+              addImageTransform &&
+              imageTransform
+                ? "help-active"
+                : "help-inactive"
+            }
+          ></div>
+
           <div
             id="saveButton"
             key="saveButton"
@@ -292,6 +308,7 @@ class EditorPlace extends Component {
             }
             onClick={this.publishSaveButton_clickHandler}
           ></div>
+
           <div
             id="themeButton"
             key="themeButton"
