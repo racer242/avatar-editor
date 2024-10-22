@@ -1,24 +1,23 @@
 * {
-    font-family: Arial, Helvetica, sans-serif!important;
+  font-family: Arial, Helvetica, sans-serif !important;
 
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 
-    /* -webkit-user-drag: none;
+  /* -webkit-user-drag: none;
     user-drag: none; */
 
-    outline-style:none;
-    outline: none;
-    -webkit-tap-highlight-color: rgba(255, 255, 255, 0); /* mobile webkit */
-
+  outline-style: none;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0); /* mobile webkit */
 }
 
 *:focus {
-    outline: none;
+  outline: none;
 }
 
 body {
@@ -26,7 +25,6 @@ body {
   margin: 0px;
   padding: 0px;
 }
-
 
 h1 {
   font-size: 2em;
@@ -41,7 +39,7 @@ p {
 }
 
 small {
-  font-size: .5em;
+  font-size: 0.5em;
 }
 
 #Container {
@@ -50,21 +48,21 @@ small {
   overflow: hidden;
   position: absolute;
   display: block;
-  left:0px;
-  top:0px;
+  left: 0px;
+  top: 0px;
   width: 100%;
   height: 100%;
   line-height: 0;
+  background-color: #000;
 }
-
 
 #EditorPlace {
   position: absolute;
   display: block;
-  left:0px;
+  left: 0px;
   right: 20%;
-  top:10%;
-  bottom:0px;
+  top: 10%;
+  bottom: 0px;
   line-height: 0;
 }
 
@@ -75,160 +73,74 @@ small {
   overflow: hidden;
 }
 
+#EditorTitle {
+  position: absolute;
+  display: block;
+  transform-origin: top left;
+  overflow: hidden;
+  left: 12px;
+  right: 12px;
+  top: 12px;
+  height: 40px;
+  background-color: #282828;
+  border-radius: 4px;
+}
+#EditorTitle img {
+  position: absolute;
+  display: block;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#EditorPanel {
+  position: absolute;
+  display: block;
+  transform-origin: top left;
+  overflow: hidden;
+  left: 12px;
+  right: 12px;
+  top: 64px;
+  bottom: 12px;
+  background-color: #282828;
+  border-radius: 4px;
+}
+
 #Editor {
   position: absolute;
   display: block;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #Controls {
   position: absolute;
   display: block;
   pointer-events: none;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
-#ImageEditor {
-  position: absolute;
-  display: block;
-}
-
-/* #TopMenu {
-  position: absolute;
-  display: block;
-  right: 0px;
-  top: 0px;
-  left: 0px;
-  height: 10%;
-
-  line-height: 0;
-  background-color: white;
-  z-index: 1;
-  border-bottom: 1px solid #dddddd;
-} */
-
-/* #SideMenu {
-  position: absolute;
-  display: block;
-  right: 0px;
-  top: 10%;
-  bottom: 0px;
-  width: 20%;
-
-  line-height: 0;
-  background-color: white;
-  z-index: 1;
-  border-left: 1px solid #dddddd;
-} */
 #BackImage,
 #MainImage {
   position: absolute;
   display: block;
-  width: 100%;
-  height: 100%;
   pointer-events: none;
   opacity: 0.95;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #BackImage {
   opacity: 1;
 }
 
-.sideMenuImage {
-  position: absolute;
-  display: block;
-  width: 100%;
-  object-fit: contain;
-  cursor: pointer;
-  -webkit-user-drag: none;
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
-  user-drag: none;
-}
-
-.topMenuButton {
-  position: absolute;
-  display: block;
-  background-color: #ddd;
-  border: 1px solid #eee;
-  cursor: pointer;
-  line-height: normal;
-  text-align: center;
-  padding: 10px;
-  top:50%;
-  transform: translateY(-50%);
-}
-
-
-.topMenuTitle {
-  position: absolute;
-  display: block;
-  line-height: normal;
-  text-align: center;
-  padding: 10px;
-  top:50%;
-  transform: translateY(-50%);
-  width: 100%;
-
-}
-
-.sideMenuButton {
-  position: absolute;
-  display: block;
-  width: 60%;
-  left: 50%;
-  background-color: #ddd;
-  border: 1px solid #eee;
-  cursor: pointer;
-  line-height: normal;
-  text-align: center;
-  padding: 10px;
-}
-
-.editorImage {
-  position: absolute;
-  /* background-color: white; */
-  -webkit-user-drag: none;
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
-  user-drag: none;
-
-  width:100%;
-  height:100%;
-
-}
-
-.editorImageContainer{
-  position: absolute;
-  /* background-color: white; */
-  overflow: hidden;
-}
-
-.loadButton {
-  position: absolute;
-  background-color: rgba(255, 255, 255, 0);
-  overflow: hidden;
-}
-
-.loadInput {
-  position: absolute;
-  font-size: 500px;
-  text-align: left;
-  cursor: pointer;
-  opacity: 0;
-}
-
-.loadInput::-webkit-file-upload-button {
-  cursor: pointer;
-}
-
-.controlsContainer{
+.controlsContainer {
   position: absolute;
   pointer-events: none;
-  /* overflow: hidden; */
-  /* border-width: 1;
-  border-style: solid;
-  border-color: #fff; */
 }
 
 .help {
@@ -240,7 +152,24 @@ small {
   -o-user-drag: none;
   user-drag: none;
 
-  width:100%;
-  height:100%;
+  width: 100%;
+  height: 100%;
+}
 
+.loadButton {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0);
+  overflow: hidden;
+}
+
+.loadInput {
+  position: absolute;
+  font-size: 1500px;
+  text-align: left;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.loadInput::-webkit-file-upload-button {
+  cursor: pointer;
 }

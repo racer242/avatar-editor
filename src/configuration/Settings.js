@@ -2,7 +2,7 @@ import { isMobile, isLocal } from "../core/helpers";
 
 const settings = {
   assetsUrl: ".",
-  localStoreName: "appState_261020",
+  localStoreName: "appState_221024",
 
   isMobile: isMobile(),
   isLocal: isLocal(),
@@ -17,6 +17,20 @@ const settings = {
     height: 500,
   },
 
+  addImagesRealSize: {
+    width: 500,
+    height: 500,
+  },
+
+  addImagesScale: 1,
+
+  maskMargins: {
+    left: 0,
+    right: 0,
+    bottom: 0,
+    top: 0,
+  },
+
   addImagesDefaultScale: 0.5,
 
   mainImageSrc: "",
@@ -25,8 +39,8 @@ const settings = {
 
   resultImagesSrc: [""],
 
-  mainImageSrc: "",
-  backImageSrc: "",
+  mainImageSrc: {},
+  backImageSrc: {},
 
   help1ImageSrc: "",
   help2ImageSrc: "",
@@ -46,6 +60,7 @@ const settings = {
   publishable: true,
 
   republishInterval: 5000,
+  theme: "dark",
 };
 
 export default settings;

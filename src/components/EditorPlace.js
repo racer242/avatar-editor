@@ -7,6 +7,7 @@ import {
   setStoreData,
   clearHelp,
   useImage,
+  resetAction,
 } from "../actions/appActions";
 
 class EditorPlace extends Component {
@@ -28,6 +29,9 @@ class EditorPlace extends Component {
 
     this.publishSaveButton_clickHandler =
       this.publishSaveButton_clickHandler.bind(this);
+
+    this.themeButton_clickHandler = this.themeButton_clickHandler.bind(this);
+    this.resetButton_clickHandler = this.resetButton_clickHandler.bind(this);
 
     this.mouseDownHandler = this.mouseDownHandler.bind(this);
   }
@@ -112,6 +116,18 @@ class EditorPlace extends Component {
     this.publish("save");
   }
 
+  themeButton_clickHandler(event) {
+    if (this.state.theme == "dark") {
+      this.store.dispatch(setStoreData({ theme: "light" }));
+    } else {
+      this.store.dispatch(setStoreData({ theme: "dark" }));
+    }
+  }
+
+  resetButton_clickHandler(event) {
+    this.store.dispatch(resetAction());
+  }
+
   mouseDownHandler() {
     this.store.dispatch(clearHelp());
   }
@@ -129,6 +145,15 @@ class EditorPlace extends Component {
       }
     }
 
+    let imageSrc = this.state.addImagesSrc ? this.state.addImagesSrc[0] : null;
+
+    let addImageTransform = this.state.addImagesTransform
+      ? this.state.addImagesTransform[0]
+      : null;
+    let imageTransform = this.state.imagesTransform
+      ? this.state.imagesTransform[0]
+      : null;
+
     children.push(
       <div
         id="EditorContainer"
@@ -140,90 +165,138 @@ class EditorPlace extends Component {
           transform: `scale(${this.state.editorScale}) translateX(${this.state.editorX}px) translateY(${this.state.editorY}px)`,
         }}
       >
-        <img id="BackImage" key="BackImage" src={this.state.backImageSrc} />
-        <Editor
-          id="Editor"
-          key="Editor"
-          scale={this.state.editorScale}
-          store={this.props.store}
-          ref={this.editorRef}
-          style={{
-            width: this.state.editorBounds ? this.state.editorBounds.width : 0,
-            height: this.state.editorBounds
-              ? this.state.editorBounds.height
-              : 0,
-          }}
-        />
-        <img
-          id="MainImage"
-          key="MainImage"
-          src={this.state.mainImageSrc}
-          style={{
-            opacity: this.state.editable ? 0.9 : 1,
-          }}
-        />
-        <Controls
-          id="Controls"
-          key="Controls"
-          scale={this.state.editorScale}
-          store={this.props.store}
-          ref={this.editorRef}
-          style={{
-            display: this.state.editable ? "block" : "none",
-            width: this.state.editorBounds ? this.state.editorBounds.width : 0,
-            height: this.state.editorBounds
-              ? this.state.editorBounds.height
-              : 0,
-          }}
-        />
-      </div>
-    );
-
-    let imageSrc = this.state.addImagesSrc ? this.state.addImagesSrc[0] : null;
-    let addImageTransform = this.state.addImagesTransform
-      ? this.state.addImagesTransform[0]
-      : null;
-    let imageTransform = this.state.imagesTransform
-      ? this.state.imagesTransform[0]
-      : null;
-
-    children.push(
-      <div
-        id="buttonContainer"
-        key="bditorContainer"
-        style={{
-          width: this.state.editorBounds ? this.state.editorBounds.width : 0,
-          height: this.state.editorBounds ? this.state.editorBounds.height : 0,
-          transform: `scale(${this.state.editorScale}) translateX(${this.state.editorX}px) translateY(${this.state.editorY}px)`,
-        }}
-      >
-        <div id="loadButton" key="loadButton" className="loadButton">
-          <input
-            id="inp0"
-            type="file"
-            onChange={this.loadButton_clickHandler}
-            className="loadInput"
-          />
-          {imageSrc && imageSrc !== "" ? "Заменить фото" : "Выбрать фото"}
+        <div id="EditorTitle" key="EditorTitle">
+          <img src="title.svg" />
         </div>
+        <div id="EditorPanel" key="EditorPanel">
+          <img
+            id="BackImage"
+            key="BackImage"
+            style={{
+              width: this.state.addImagesDefaultSize
+                ? this.state.addImagesDefaultSize.width
+                : 0,
+              height: this.state.addImagesDefaultSize
+                ? this.state.addImagesDefaultSize.height
+                : 0,
+            }}
+            src={
+              this.state.backImageSrc
+                ? this.state.backImageSrc[this.state.theme]
+                : ""
+            }
+          />
+          <Editor
+            id="Editor"
+            key="Editor"
+            scale={this.state.editorScale}
+            store={this.props.store}
+            ref={this.editorRef}
+            style={{
+              width: this.state.addImagesRealSize
+                ? this.state.addImagesRealSize.width
+                : 0,
+              height: this.state.addImagesRealSize
+                ? this.state.addImagesRealSize.height
+                : 0,
+              transform: `matrix(${this.state.addImagesScale}, 0, 0, ${
+                this.state.addImagesScale
+              }, ${
+                this.state.addImagesRealSize
+                  ? -this.state.addImagesRealSize.width / 2
+                  : 0
+              }, ${
+                this.state.addImagesRealSize
+                  ? -this.state.addImagesRealSize.height / 2
+                  : 0
+              })`,
+            }}
+          />
+          <img
+            id="MainImage"
+            key="MainImage"
+            src={
+              this.state.mainImageSrc
+                ? this.state.mainImageSrc[this.state.theme]
+                : ""
+            }
+            style={{
+              opacity: this.state.editable ? 0.9 : 1,
+              width: this.state.addImagesDefaultSize
+                ? this.state.addImagesDefaultSize.width
+                : 0,
+              height: this.state.addImagesDefaultSize
+                ? this.state.addImagesDefaultSize.height
+                : 0,
+            }}
+          />
+          <Controls
+            id="Controls"
+            key="Controls"
+            scale={this.state.editorScale}
+            store={this.props.store}
+            ref={this.editorRef}
+            style={{
+              display: this.state.editable ? "block" : "none",
+              width: this.state.addImagesDefaultSize
+                ? this.state.addImagesDefaultSize.width
+                : 0,
+              height: this.state.addImagesDefaultSize
+                ? this.state.addImagesDefaultSize.height
+                : 0,
+            }}
+          />
+          <div
+            id="loadButton"
+            key="loadButton"
+            className={imageSrc && imageSrc !== "" ? "replace" : "load"}
+          >
+            <input
+              id="inp0"
+              type="file"
+              onChange={this.loadButton_clickHandler}
+              className="loadInput"
+            />
+          </div>
+          <div
+            id="saveButton"
+            key="saveButton"
+            className={
+              "publishButton" +
+              (this.state.publishable &&
+              this.state.editable &&
+              imageSrc &&
+              imageSrc !== "" &&
+              addImageTransform &&
+              imageTransform
+                ? " get-active"
+                : " get-disabled")
+            }
+            onClick={this.publishSaveButton_clickHandler}
+          ></div>
+          <div
+            id="themeButton"
+            key="themeButton"
+            className={"theme-" + this.state.theme}
+            onClick={this.themeButton_clickHandler}
+          ></div>
 
-        <div
-          id="saveButton"
-          key="saveButton"
-          className={
-            "publishButton" +
-            (this.state.publishable &&
-            this.state.editable &&
-            imageSrc &&
-            imageSrc !== "" &&
-            addImageTransform &&
-            imageTransform
-              ? " active"
-              : " inactive")
-          }
-          onClick={this.publishSaveButton_clickHandler}
-        >
-          <img src={this.state.saveIconSrc} width="60" height="60" />
+          <div
+            id="resetButton"
+            key="resetButton"
+            onClick={this.resetButton_clickHandler}
+            style={{
+              display:
+                this.state.publishable &&
+                this.state.editable &&
+                imageSrc &&
+                imageSrc !== "" &&
+                addImageTransform &&
+                imageTransform
+                  ? "block"
+                  : "none",
+            }}
+          ></div>
         </div>
       </div>
     );

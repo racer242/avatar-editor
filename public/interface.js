@@ -1,119 +1,109 @@
-var currentFrame=0;
-var frames=[];
-var appInstance=null;
+var currentFrame = 0;
+var frames = [];
+var appInstance = null;
 
 function onEditorAppReadyHandler(app) {
+  appInstance = app;
 
-  appInstance=app;
+  app.setData({
+    editorBounds: {
+      width: 320,
+      height: 480,
+    },
 
-  app.setData(
-    {
-      editorBounds:{
-        width:1140,
-        height:700,
-      },
+    addImagesDefaultSize: {
+      width: 190,
+      height: 190,
+    },
 
-      addImagesDefaultSize:{
-        width:450,
-        height:450,
-      },
+    addImagesRealSize: {
+      width: 1024,
+      height: 1024,
+    },
 
-      addImagesDefaultScale:0.5,
+    addImagesScale: 190 / 1024,
 
-      minScale:0.5,
-      maxScale:10,
+    maskMargins: {
+      left: 20 * (1024 / 190),
+      right: 12 * (1024 / 190),
+      bottom: 15 * (1024 / 190),
+      top: 17 * (1024 / 190),
+    },
 
-      minRotation:0,
-      maxRotation:360,
+    minScale: 1,
+    maxScale: 10,
 
-      mainImageSrc:"image.png",
-      backImageSrc:"back_image.jpg",
+    imagesTransform: [{ s: 1, r: 0 }],
 
-      help1ImageSrc:"help1.svg",
-      help2ImageSrc:"help2.svg",
+    minRotation: 0,
+    maxRotation: 360,
 
-      fbIconSrc:"fb.png",
-      vkIconSrc:"vk.png",
-      saveIconSrc:"save.png",
+    mainImageSrc: { dark: "black.png", light: "white.png" },
+    backImageSrc: { dark: "black.png", light: "white.png" },
 
-      addImagesSrc:[""],
+    help1ImageSrc: "help1.svg",
+    help2ImageSrc: "help2.svg",
 
-      resultImagesSrc:[""],
+    saveIconSrc: "save.png",
 
-      addImagesTransform:[
-        ["1","0","0","1","340","169"],
-        // ["0.5","0","0","0.5","115","-55"],
-      ],
+    addImagesSrc: [""],
 
-      editable:true,
-      mimeType:"image/png",
-      // mimeType:"image/jpeg",
-    }
-  );
+    resultImagesSrc: [""],
 
+    addImagesTransform: [["1", "0", "0", "1", "0", "0"]],
+
+    editable: true,
+    mimeType: "image/png",
+
+    theme: "dark",
+    // mimeType:"image/jpeg",
+  });
 }
 
 function onEditorAppImageHandler(app) {
-  var data=app.getData()
-  var loadedImageCount=0
+  var data = app.getData();
+  var loadedImageCount = 0;
   for (var i = 0; i < data.addImagesSrc.length; i++) {
-    if ((data.addImagesSrc[i])&&(data.addImagesSrc[i]!="")) {
+    if (data.addImagesSrc[i] && data.addImagesSrc[i] != "") {
       loadedImageCount++;
     }
   }
-  console.log("onEditorAppImageHandler Loaded:",loadedImageCount);
+  console.log("onEditorAppImageHandler Loaded:", loadedImageCount);
 }
-
-function getVkUrl(purl,ptitle,pimg) {
-  var url  = 'http://vk.com/share.php?';
-  if (purl) {
-      url += 'url=' + encodeURIComponent(purl);
-  }
-  if (ptitle) {
-      url += '&title=' + encodeURIComponent(ptitle);
-  }
-  if (pimg) {
-      url += '&image=' + encodeURIComponent(pimg);
-  }
-  url += '&noparse=true';
-
-  return url;
-};
 
 function addUniqueToUrl(url) {
   if (url) {
-    var uStr=new Date().getTime();
-    if (url.indexOf("?")<0) {
-      url = url+"?u="+uStr;
+    var uStr = new Date().getTime();
+    if (url.indexOf("?") < 0) {
+      url = url + "?u=" + uStr;
     } else {
-      url = url+"&u="+uStr;
+      url = url + "&u=" + uStr;
     }
   }
   return url;
 }
 
 function downloadLink(link) {
-  link=addUniqueToUrl(link);
+  link = addUniqueToUrl(link);
 
-  let a = document.createElement('a');
+  let a = document.createElement("a");
   a.href = link;
 
-  link = link.substr(link.lastIndexOf('/') + 1);
-  if (link.indexOf('?')>=0) {
-    link = link.substr(0,link.indexOf('?'));
+  link = link.substr(link.lastIndexOf("/") + 1);
+  if (link.indexOf("?") >= 0) {
+    link = link.substr(0, link.indexOf("?"));
   }
 
   a.download = link;
   a.click();
 }
 
-
-function onEditorAppImagesHandler(app,images,target) {
+function onEditorAppImagesHandler(app, images, target) {
   console.log("onEditorAppImagesHandler");
 
-  var data=app.getData();
+  var data = app.getData();
 
-  if ((target=="fb")||(target=="vk")) {
+  if (target == "fb" || target == "vk") {
     var windowReference = window.open();
   }
 
@@ -125,37 +115,19 @@ function onEditorAppImagesHandler(app,images,target) {
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
       var json = JSON.parse(xhr.responseText);
-      var publishUrl=window.location.href;
-      if (publishUrl.slice(-1)!="/") publishUrl+="/";
-      publishUrl+=json.url;
-      var encodedUrl=escape(publishUrl);
-      if (target=="fb") {
-        windowReference.location = "https://www.facebook.com/sharer/sharer.php?u="+encodedUrl;
-      } else
-      if (target=="vk") {
-        windowReference.location = getVkUrl(publishUrl,"Галерея",publishUrl);
-      } else
-      if (target=="ready") {
-        readyHandler(publishUrl);
-      } else
-      if (target=="save") {
-        downloadLink(publishUrl);
-      }
+      var publishUrl = window.location.href;
+      if (publishUrl.slice(-1) != "/") publishUrl += "/";
+      publishUrl += json.url;
+      downloadLink(publishUrl);
     }
   };
-  var data = JSON.stringify(
-    {
-      image:images[0],
-      x:340,
-      y:169,
-      width:450,
-      height:450,
-      scale:1,
-    }
-  );
+  var data = JSON.stringify({
+    image: images[0],
+    x: 340,
+    y: 169,
+    width: 450,
+    height: 450,
+    scale: 1,
+  });
   xhr.send(data);
-}
-
-function readyHandler(url) {
-  console.log("СОБЫТИЕ ОТ КНОПКИ ГОТОВО. ССЫЛКА НА КАРТИНКУ:",url);
 }
